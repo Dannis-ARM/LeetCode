@@ -35,3 +35,23 @@ class Solution:
             return 0
         que = [root]
         return self.bfs(que, 0)
+    
+# bfs new
+class Solution:
+    def maxDepth(self, root: Optional[TreeNode]) -> int:
+        if not root:
+            return 0
+
+        queue = [root]
+
+        depth = 0
+        while len(queue) != 0:
+            length = len(queue)
+            for _ in range(length):
+                cur_node = queue.pop(0)
+                if cur_node.left:
+                    queue.append(cur_node.left)
+                if cur_node.right:
+                    queue.append(cur_node.right)
+            depth += 1
+        return depth

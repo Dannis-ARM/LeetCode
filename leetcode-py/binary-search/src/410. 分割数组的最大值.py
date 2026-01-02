@@ -45,3 +45,39 @@ class Solution:
                 l = mid + 1
 
         return l
+
+### My Other tries
+class Solution:
+    def splitArray(self, nums: List[int], k: int) -> int:
+        # min max - use bs
+
+        # mid is trying on min_max
+        # check func()
+        # check if current nums can split into k groups which min_max < mid
+        if len(nums) < 1:
+            return None
+
+        l = max(nums)
+        r = sum(nums)
+
+        res = 0 # min_max
+
+        def check(nums, mid):
+            cnt = 1
+            sum_group = 0
+            for i in range(len(nums)):
+                sum_group += nums[i]
+                if sum_group > mid:
+                    cnt += 1
+                    sum_group = nums[i]
+                if cnt > k:
+                    return False
+            return True
+
+        while l < r:
+            mid = (l + r) // 2
+            if check(nums, mid):
+                r = mid
+            else:
+                l = mid + 1
+        return r
